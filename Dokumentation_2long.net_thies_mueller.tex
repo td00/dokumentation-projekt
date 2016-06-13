@@ -1,0 +1,169 @@
+\documentclass[a4paper, DIV20, 11pt, headsepline, parskip]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{fancyhdr}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{listings} 
+\usepackage{hyperref}
+\usepackage{pdfpages}
+\usepackage{listings}
+\usepackage[ngerman]{babel}
+\usepackage{xstring}
+\usepackage{etoolbox}
+\usepackage{listingsutf8}
+\lstset{inputencoding=utf8/latin1}
+\pagestyle{fancy}
+%%%%%%%%%BEGIN CONFIG%%%%%%%%%
+\newcommand{\usubject}{Dokumentation (2long.net)}
+\newcommand{\uauthor}{Thies Müller,\\ Marcel Tönnies,\\ Robin Schlaak\\}
+\newcommand{\udate}{05.06.2016}
+\newcommand{\uexcnumber}{7}
+\newcommand{\uheader}{Müller, Tönnies, Schlaak}
+\newcommand{\ugroupe}{}
+\newcommand{\urelease}{}
+%%%%%%%%%END CONFIG%%%%%%%%%
+%%%%%%%%%INTERNAL SETTINGS%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%PAGE HEADER
+\lhead{\uheader}
+\chead{}
+\rhead{\usubject {} \udate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%FRONT PAGE%%%%%%%%%
+\title{\usubject}
+\author{\uauthor}
+\begin{document}
+\date{\udate}
+\maketitle
+\thispagestyle{empty}
+\newpage
+%%%%%%%%%BEGIN CONTENT%%%%%%%%%
+\tableofcontents
+\pagebreak
+\section{Projekt}
+
+\subsection{Vorstellung des Projekts}
+Wir haben uns entschlossen ein Portal zu erstellen in dem (ehemalige) Schüler der Berufsbildenden Schule 2 aus Wolfsburg Bücher verleihen oder verkaufen können.
+Als Vertrauensstufe und Verwaltende Personen sollen die Lehrer/innen der BBS2 fungieren. 
+\subsection{IST-Analyse}
+Zu dem Momentanen Zeitpunkt gibt es die Möglichkeit Einträge in das interne Forum auf dem iServ zu erstellen.
+Dies ist aber nur begrenzt sinnvoll einsetzbar, da kurz nach dem Ausscheiden aus der Schule der iServ Account gelöscht wird.
+So gibt es für ehemalige Schüler nicht die Möglichkeit ihre alten Schulbücher zu verkaufen.
+\subsection{Soll-Konzept}
+Wir wollen eine vom iServ unabhängige Plattform entwickeln wo sich Schüler der BBS2 Wolfsburg registrieren können um ihre Schulbücher weiter zu geben oder diese Kurzzeitig zu verleihen
+\section{Realisierung}
+\subsection{Vorbereitungen}
+Für die Realisierung haben wir einige Möglichkeiten in Betracht gezogen und uns dann für eine Wordpress Installation in Kombination mit Plugins entschieden, welche den Verkauf vereinfachen sollen.
+\subsection{Technische Implementierung}
+\subsubsection{Technischer Stand}
+Technisch ist das Projekt auf einen Webserver mit nginx 1.6.2,
+MySQL 5.6.23-1 basierend auf einem
+Debian 3.16.7-ckt25-2 (2016-04-08)x86-64 GNU/Linux 
+realisiert.
+Wir haben uns entschlossen, da wir mit Nutzerdaten arbeiten eine SSL-Verschlüsselung einzusetzen um uns und die Besucher vor Man-in-the-Middle Attacken oder ähnlichem zu schützen.
+Die Konfiguration des nginx Webservers sowie die Konfiguration der SSL Verschlüsselung befindet sich im Anhang.
+\subsubsection{Installation und Konfiguration}
+Wir haben uns entschieden ein zu dem Zeitpunkt aktuelles Wordpress (4.5.2) in Deutscher Sprache zu installieren.
+Bei der Installation wurde der Account "administrator" mit der E-Mail Adresse "noreply@2long.net" angelegt.
+Dieser wird nur für die Einrichtung benutzt.
+Die Administration kann dann über personenbezogene Administratoraccounts durchgeführt werden.
+\subsubsection{Anpassung von Wordpress mit Plugins und eigenen Modifikationen}
+Nach der Installation von Wordpress wurde das Plugin "GarageSale" von "Leo Eibler" installiert.
+Dieses bietet Nutzern die Möglichkeit nach der Registrierung an der Webseite selber Gegenstände zum Verkauf anzubieten.
+Das Plugin wurde an unsere Bedürfnisse angepasst und auf die Startseite eingebunden, sodass alle Artikel die Verkauft werden direkt eingesehen werden können.
+Bei den Änderungen des Plugins "GarageSale" wurde darauf geachtet nicht die Lizenz (Apache 2.0) zu verletzen.
+
+Als weiteres Plugin wurde "Contact Form Add" von "umarbajwa" installiert.
+Dieses bietet die Möglichkeit möglichst simpel ein Kontaktformular in eine Wordpress Installation einzufügen.
+
+Als letztes Plugin kommt "User Role Editor" von "Vladimir Garagulya" zum Einsatz.
+Dieses Plugin nutzen wir dafür um eigene Nutzerrollen in Wordpress zu definieren.
+So wurde Beispielsweise die Rolle "Abonnent" in "Schüler" umbenannt und es wurde eine weitere Rolle mit dem Namen "Lehrer" definiert die dazu berechtigt ist "Abonnenten" oder "Schüler" anzulegen.
+Die Benutzerrolle "Administrator" wurde nicht editiert um ein späteren Berechtigungsfehler durch ein fehlen der Benutzerrolle auszuschließen.
+
+Als Design wurde die Wordpress Komponente "Tiny Framework" von "Tomas Mackevicius" installiert.
+Dieses ist sowohl für Mobilgeräte als auch Desktopgeräte optimiert und überzeugte durch seinen einfach gestalteten Aufbau auf einem HTML5-Grundgerüst.
+Des weiteren bietet das Tiny Framework die Möglichkeit auf Basis des Frameworks selber so genannte "Child-Designs" zu definieren, was eine grafische Umgestaltung der Webseite offen lässt.
+\section{Testphase}
+Das Projekt wurde sowohl einem White-Box Test als auch einem Black-Box Test unterzogen.
+Dafür wurde einmal von dem Entwickler des Projektes weitere Benutzeraccounts angelegt ("thies.mueller" und "test.lehrer") und mit diesen die einzelnen Funktionsabläufe überprüft.
+Als Black-Box Test wurde ein Zugang an den Projektpartner Robin Schlaak ausgegeben der selbsttätig die Software erforscht hat.
+\subsection{Funktionstests}
+Folgende Funktionen wurden Positiv getestet:
+\begin{itemize}
+\item Ein Angebot einstellen
+\item Ein Angebot ändern
+\item Ein Angebot löschen
+\item Ein Angebot auf den Status "Verkauft" setzen
+\item Ein Angebot löschen
+\item Ein Angebot als Administrator löschen
+\item Ein Angebot als Administrator editieren
+\item Ein Bild zu einem Angebot hinzufügen
+\item Eine Kontaktanfrage stellen
+\item Eine Registrierung ausführen
+\item Einen Nutzeraccount bestätigen
+\end{itemize}
+\subsection{Aufgetretene Probleme}
+Während der Testphase trat das Problem auf das eine Benachrichtigung per E-Mail an die Lehrkräfte bei einer neuen Nutzer Registrierung nicht möglich ist.
+Die E-Mail kann nur an einen Administrator verschickt werden.
+Mittelfristig wird geprüft ob eine Weiterleitung von der an den Administrator Account geschickten Mail, über den Mail Server Sinn ergibt.
+Diese Entscheidung übergeben wir mit der Dokumentation an den Kunden.
+\section{Zusammenfassung}
+Zusammenfassend wurde das Ziel eine Plattform zu entwickeln auf der Schüler und ehemalige Schüler der Berufsbildenden Schulen 2 aus Wolfsburg Bücher und andere Schulmaterialien untereinander weiter Verkaufen können, falls sie zum Beispiel aus der Schule ausscheiden.
+\section{Ausblick}
+Langfristig könnte überlegt werden eine Zahlungsabwicklung über die Plattform zu realisieren.
+Dies war keine Anforderung des Lasten- und/oder Pflichtenheftes und wurde deshalb nicht implementiert.
+Eine weitere Idee wäre ein Bewertungssystem einzuführen, anhand dessen man Nutzer mit denen man gehandelt hat Bewerten kann.
+Auch eine Möglichkeit direkt über die Plattform den Verkäufer zu kontaktieren und die Abwicklung des Verkaufes darüber zu gestalten ist denkbar.
+Dafür fehlen aber einige Funktionen im für das Projekt genutzte Grundgerüst (Wordpress)
+\section{Anhang}
+In dem Anhang sind Konfigurations Dateien die für die Installation unter gleichen Umständen benötigt werden.
+\subsection{nginx Konfiguration}
+\lstinputlisting[breaklines=true]{nginx.conf}
+\subsection{ssl Konfiguration}
+\lstinputlisting[breaklines=true]{ssl.conf}
+\subsection{Wordpress Konfiguration}
+Aus dieser Konfiguration wurden die Zugangsdaten zu dem MySQL Server entfernt.
+\lstinputlisting[language=php,breaklines=true]{input.php}
+\pagebreak
+\section{Quellen}
+\begin{itemize}
+\item Wordpress
+\begin{itemize}
+\item \url{https://de.wordpress.org/latest-de_DE.zip}
+\end{itemize}
+\item Contact Form
+\begin{itemize}
+\item Autor: umarbajwa (WEB-SETTLER)
+\item \url{https://wordpress.org/plugins/contact-form-add/}
+\end{itemize}
+\item GarageSale
+\begin{itemize}
+\item Autor: Leo Eibler
+\item \url{https://wordpress.org/plugins/garagesale/}
+\end{itemize}
+\item User Role Editor
+\begin{itemize}
+\item Autor: Vladimir Garagulya
+\item \url{https://wordpress.org/plugins/user-role-editor/}
+\end{itemize}
+\item Tiny Framework
+\begin{itemize}
+\item Autor: Tomas Mackevicius
+\item \url{https://wordpress.org/themes/tiny-framework/}
+\end{itemize}
+\end{itemize}
+
+%%%%%%%%%END CONTENT%%%%%%%%%%%
+\end{document}
