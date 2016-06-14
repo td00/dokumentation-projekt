@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.6.14)  14 JUN 2016 11:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.6.14)  14 JUN 2016 11:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -740,7 +740,7 @@ been already used, duplicate ignored
                    \relax 
 l.56 \section
              {Projekt} [1]
-Overfull \hbox (53.57701pt too wide) in paragraph at lines 68--78
+Overfull \hbox (73.04369pt too wide) in paragraph at lines 68--78
 [] 
  []
 
